@@ -1,0 +1,24 @@
+{
+  "name": "team-manager-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-mongo": "sudo systemctl start mongod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrohlucena/team-manager-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrohlucena/team-manager-api/issues"
+  },
+  "homepage": "https://github.com/pedrohlucena/team-manager-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
