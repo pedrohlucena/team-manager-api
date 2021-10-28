@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
-let squadSchema = new mongoose.Schema({
-  name: String,
-
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-});
+const squadSchema = mongoose.Schema({
+    "name": String,
+    
+    employees: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Employee',
+            required: true
+        }
+    ]
+})
 
 module.exports = mongoose.model('Squad', squadSchema);
