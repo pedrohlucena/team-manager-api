@@ -15,18 +15,6 @@ router.post('/create', async (req,res) => {
     }
 })
 
-router.delete('/:id', async (req,res) => {
-    let { id } = req.params
-
-    try {
-        await Employee.findByIdAndDelete(id)
-        res.status(200).json({message: 'Employee deleted!'})
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({error: 'Problem to delete a employee'})
-    }
-})
-
 router.get('/:id', async (req,res) => {
     try {
         const { id } = req.params

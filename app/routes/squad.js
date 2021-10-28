@@ -1,12 +1,17 @@
 var express = require('express')
 var router = express.Router()
 const Squad = require('../model/squad')
+const Employee = require('../model/employee')
 
 router.post('/create', async (req,res) => {
-    let { name, employees } = req.body
+    let { name, employeesIDS } = req.body
 
     if (!name) {
         try {
+           employeesIDS.forEach(async (currentEmployeeID) => {
+               employees.push(await Employee.findById(currentEmployeeID))
+           }); 
+           
             let squad = new Squad({employees: employees})
             await squad.save()
             res.status(200).json(squad)
@@ -16,13 +21,17 @@ router.post('/create', async (req,res) => {
         }
     } else {
         try {
-            let squad = new Squad({name: name, employees: employees})
-            await squad.save()
-            res.status(200).json(squad)
-        } catch (error) {
-            console.error(error)
-            res.status(500).json({error: 'Problem to create a new squad'})
-        }
+            employeesIDS.forEach(async (currentEmployeeID) => {
+                employees.push(await Employee.findById(currentEmployeeID))
+            }); 
+            
+             let squad = new Squad({name: name, employees: employees})
+             await squad.save()
+             res.status(200).json(squad)
+         } catch (error) {
+             console.error(error)
+             res.status(500).json({error: 'Problem to create a new squad'})
+         }
     }
 })
 
