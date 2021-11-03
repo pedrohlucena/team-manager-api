@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const squadSchema = mongoose.Schema({
-    "name": String,
+const squadSchema = new mongoose.Schema({
+    name: String,
     
     employees: [
         {

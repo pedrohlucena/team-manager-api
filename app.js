@@ -1,10 +1,10 @@
-const express = require('express')
 require('./config/database')
+const express = require('express')
 
 const app = express()
 
-var employeeRouter = require('./app/routes/employee');
-var squadRouter = require('./app/routes/squad');
+const employeeRouter = require('./app/routes/employee');
+const squadRouter = require('./app/routes/squad');
 
 app.use(express.json());
 app.use('/employee', employeeRouter);

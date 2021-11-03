@@ -1,7 +1,6 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const Squad = require('../model/squad')
-const Employee = require('../model/employee')
 
 router.post('/create', async (req,res) => {
     let { squadName, employeesIDS } = req.body
@@ -53,9 +52,7 @@ router.post('/add', async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-      let squads = await Squad.find()
-
-      res.json(await Squad.find().populate('employees'))
+        res.json(await Squad.find().populate('employees'))
     } catch (error) {
         console.error(error)
         res.status(500).json({error: error})

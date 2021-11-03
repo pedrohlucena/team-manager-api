@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const Employee = require('../model/employee')
 
 router.post('/create', async (req,res) => {
@@ -16,8 +16,9 @@ router.post('/create', async (req,res) => {
 })
 
 router.get('/:id', async (req,res) => {
+    const { id } = req.params
+
     try {
-        const { id } = req.params
         let employeeInfo = await Employee.findById(id)
         res.status(200).json(employeeInfo)
     } catch (error) {
