@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-mongo": "sudo systemctl start mongod",
-    "start": "nodemon start"
+    "start": "nodemon start",
+    "commit": "cz"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,12 @@
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
-    "husky": "^7.0.4",
+    "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.14"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
