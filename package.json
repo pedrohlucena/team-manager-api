@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-mongo": "sudo systemctl start mongod",
     "start": "nodemon start",
-    "commit": "cz"
+    "commit": "cz",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
     "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.4",
     "nodemon": "^2.0.14"
   },
   "config": {
