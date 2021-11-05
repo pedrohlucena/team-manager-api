@@ -4,10 +4,10 @@ const Employee = require('../model/employee')
 const router = express.Router()
 
 router.post('/create', async (req,res) => {
-    let { name, email, position }  = req.body
+    const { name, email, position }  = req.body
 
     try {
-        let employee = new Employee({name: name, email: email, position: position})
+        const employee = new Employee({name: name, email: email, position: position})
         await employee.save()
         res.status(200).json(employee)
     } catch (error) {
@@ -20,7 +20,7 @@ router.get('/:id', async (req,res) => {
     const { id } = req.params
 
     try {
-        let employeeInfo = await Employee.findById(id)
+        const employeeInfo = await Employee.findById(id)
         res.status(200).json(employeeInfo)
     } catch (error) {
         res.status(500).json({error: 'Problem getting employee information'})
@@ -29,7 +29,7 @@ router.get('/:id', async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-      let employees = await Employee.find()
+      const employees = await Employee.find()
       res.json(employees)
     } catch (error) {
         console.error(error)

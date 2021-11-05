@@ -4,11 +4,11 @@ const Squad = require('../model/squad')
 const router = express.Router()
 
 router.post('/create', async (req,res) => {
-    let { squadName, employeesIDS } = req.body
+    const { squadName, employeesIDS } = req.body
 
     if (!squadName) {
         try {
-            let squad = new Squad({employees: employeesIDS})
+            const squad = new Squad({employees: employeesIDS})
             await squad.save()
             res.status(200).json(await Squad.findById(squad._id).populate('employees'))
         } catch (error) {
@@ -17,7 +17,7 @@ router.post('/create', async (req,res) => {
         }
     } else {
         try {
-             let squad = new Squad({name: squadName, employees: employeesIDS})
+             const squad = new Squad({name: squadName, employees: employeesIDS})
              await squad.save()
              res.status(200).json(await Squad.findById(squad._id).populate('employees'))
          } catch (error) {
@@ -38,7 +38,7 @@ router.get('/:id', async (req,res) => {
 })
 
 router.post('/add', async (req,res) => {
-    let { squadID, employeeToAdd } = req.body
+    const { squadID, employeeToAdd } = req.body
     
     try {
         let squad = await Squad.findById(squadID)
