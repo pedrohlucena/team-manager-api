@@ -1,6 +1,7 @@
 const express = require('express')
-const router = express.Router()
 const Employee = require('../model/employee')
+
+const router = express.Router()
 
 router.post('/create', async (req,res) => {
     let { name, email, position }  = req.body
