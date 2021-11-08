@@ -1,5 +1,5 @@
 const express = require('express')
-const Squad = require('../model/squad')
+import { SquadRepository } from '../repositories/index'
 
 const router = express.Router()
 
@@ -8,18 +8,18 @@ router.post('/create', async (req,res) => {
 
     if (!squadName) {
         try {
-            const squad = new Squad({employees: employeesIDS})
+            const squad = await SquadRepository.create({employees: employeesIDS})
             await squad.save()
-            res.status(200).json(await Squad.findById(squad._id).populate('employees'))
+            res.status(200).json(await SquadRepository.find(squad_id).populate('employees'))
         } catch (error) {
             console.error(error)
             res.status(500).json({error: 'Problem to create a new squad'})
         }
     } else {
         try {
-             const squad = new Squad({name: squadName, employees: employeesIDS})
+             const squad = await SquadRepository.create({name: squadName, employees: employeesIDS})
              await squad.save()
-             res.status(200).json(await Squad.findById(squad._id).populate('employees'))
+             res.status(200).json(await SquadRepository.find(squad_id).populate('employees'))
          } catch (error) {
              console.error(error)
              res.status(500).json({error: 'Problem to create a new squad'})
@@ -31,7 +31,7 @@ router.get('/:id', async (req,res) => {
     const { id } = req.params
 
     try {
-        res.status(200).json(await Squad.findById(id).populate('employees'))
+        res.status(200).json(await SquadRepository.find(id).populate('employees'))
     } catch (error) {
         res.status(500).json({error: 'Problem getting squad information'})
     }
@@ -41,10 +41,10 @@ router.post('/add', async (req,res) => {
     const { squadID, employeeToAdd } = req.body
     
     try {
-        let squad = await Squad.findById(squadID)
+        let squad = await SquadRepository.find(squadID)
         squad.employees.push(employeeToAdd)
         await squad.save()
-        res.json(await Squad.findById(squadID).populate('employees'))
+        res.json(await SquadRepository.find(squadID).populate('employees'))
     } catch (error) {
         console.error(error)
         res.status(401).json({error: error})
@@ -53,7 +53,7 @@ router.post('/add', async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        res.json(await Squad.find().populate('employees'))
+        res.json(await SquadRepository.find().populate('employees'))
     } catch (error) {
         console.error(error)
         res.status(500).json({error: error})
