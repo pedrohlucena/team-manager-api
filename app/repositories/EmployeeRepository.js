@@ -1,6 +1,6 @@
 const EmployeeModel = require('../model/employee')
 
-export default function buildEmployeeRepository() {
+function buildEmployeeRepository() {
     return Object.freeze ({
         getAll,
         find,
@@ -14,7 +14,9 @@ export default function buildEmployeeRepository() {
     }
 
     async function create({ ...data }) {
-        const employeeCreated = EmployeeModel.create({ ...data })
+        const employeeCreated = new EmployeeModel({ ...data })
+        employeeCreated.save()
+        
         return employeeCreated
     }
 
@@ -27,3 +29,5 @@ export default function buildEmployeeRepository() {
         return employee
     }
 }
+
+module.exports = buildEmployeeRepository

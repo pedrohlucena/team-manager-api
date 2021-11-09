@@ -1,10 +1,7 @@
-import buildEmployeeRepository from '../repositories/EmployeeRepository'
-import buildSquadRepository from './SquadRepository'
+const buildEmployeeRepository = require('../repositories/EmployeeRepository')
+const buildSquadRepository = require('./SquadRepository')
 
 const EmployeeRepository = buildEmployeeRepository()
 const SquadRepository = buildSquadRepository()
 
-export {
-    EmployeeRepository,
-    SquadRepository
-}
+module.exports = { EmployeeRepository, SquadRepository }

@@ -1,6 +1,6 @@
-import SquadModel from '../model/squad'
+const SquadModel = require('../model/squad')
 
-export default function buildSquadRepository() {
+function buildSquadRepository() {
     return Object.freeze ({
         getAll,
         find,
@@ -9,25 +9,29 @@ export default function buildSquadRepository() {
     })
 
     async function getAll() {
-        const squads = await SquadModel.find({})
-        return squads
+        return await SquadModel.find({}).populate('employees')
     }
 
-    async function create({ ...data }) {
-        const squadCreated = SquadModel.create({ ...data })
-        return squadCreated
+    async function create( { ...data } ) {
+        const squadCreated = new SquadModel( { ...data } )
+        await squadCreated.save()
+
+        return await SquadModel.findById(squadCreated._id).populate('employees')
     }
 
-    async function addNewEmployee(squadId, employeeToAdd) {
+    async function addNewEmployee(squadID, employeeToAdd) {
         let squad = await SquadModel.findById(squadID)
-        squad.employees.push(employee)
+        squad.employees.push(employeeToAdd)
         await squad.save()
 
-        return squad
+        return await SquadModel.findById(squadID).populate('employees')
     }
 
     async function find(id) {
         const squad = await SquadModel.findById(id)
-        return squad
+
+        return await SquadModel.findById(id).populate('employees')
     }
 }
+
+module.exports = buildSquadRepository

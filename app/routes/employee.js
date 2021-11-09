@@ -1,5 +1,5 @@
 const express = require('express')
-import { EmployeeRepository } from '../repositories/index'
+const { EmployeeRepository } = require('../repositories/index')
 
 const router = express.Router()
 
@@ -8,7 +8,6 @@ router.post('/create', async (req,res) => {
 
     try {
         const employee = await EmployeeRepository.create({name: name, email: email, position: position})
-        await employee.save()
         res.status(200).json(employee)
     } catch (error) {
         console.error(error)
